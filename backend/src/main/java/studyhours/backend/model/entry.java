@@ -1,13 +1,7 @@
 package studyhours.backend.model;
 
-import java.util.Locale.Category;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
 public class entry {
@@ -20,14 +14,15 @@ public class entry {
     //person who records hours as separate class
     @ManyToOne
     @JoinColumn(name="personId")
-    private Category person;
+    private person person;
 
     public entry(){}
 
-    public entry(String entrydate, String course, double hours) {
+    public entry(String entrydate, String course, double hours, person person) {
         this.entrydate = entrydate;
         this.course = course;
         this.hours = hours;
+        this.person = person;
     }
 
     public Long getId() {
@@ -62,17 +57,17 @@ public class entry {
         this.hours = hours;
     }
 
-    public Category getPerson() {
+    public person getPerson() {
         return person;
     }
 
-    public void setPerson(Category person) {
+    public void setPerson(person person) {
         this.person = person;
     }
 
     @Override
     public String toString() {
-        return "entry [entrydate=" + entrydate + ", course=" + course + ", hours=" + hours + ", person=" + this.Getperson() + "]";
+        return "entry [entrydate=" + entrydate + ", course=" + course + ", hours=" + hours + ", person=" + this.getPerson() + "]";
     }
 }
 

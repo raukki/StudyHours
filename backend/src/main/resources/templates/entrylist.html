@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Study hour entries list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<style>
+    table, th, td {
+      border:1px solid green;
+    }
+    </style>
+
+<body>
+	<h1>Study hour entries</h1>
+    <table> 
+        <th>Entrydate</th>
+        <th>Course</th>
+        <th>Hours</th>
+        <th>Person</th>
+    	<tr th:each = "entry : ${entries}">
+    		<td th:text="${entry.entrydate}"></td> 
+            <td th:text="${entry.course}"></td>  	 	
+            <td th:text="${entry.hours}"></td> 
+            <td th:text="${entry.person.name}"></td> 
+            <td><a th:href="@{/delete/{id}(id=${entry.id})}">Delete</a></td>
+            <td><a th:href="@{/edit/{id}(id=${entry.id})}">Edit</a></td>
+        </tr>
+     </table>  
+     <a href="/add">Add study hours</a>   	
+</body>
+</html>
