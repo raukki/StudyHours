@@ -7,9 +7,14 @@
 </head>
 
 <style>
-    table, th, td {
-      border:1px solid green;
+    table {
+        border-collapse: collapse;
+        width: 100%;
     }
+    th, td {
+      border:1px solid black;
+    }
+    tr:hover {background-color: greenyellow;}
     </style>
 
 <body>
@@ -28,6 +33,7 @@
             <td><a th:href="@{/edit/{id}(id=${entry.id})}">Edit</a></td>
         </tr>
      </table>  
+     <br><br>
      <a href="/add">Add study hours</a>   	
 </body>
 </html>
