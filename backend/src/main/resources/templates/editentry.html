@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Edit study hour entry</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<style>
+    form {
+        border-collapse: collapse;
+        width: 100%;
+        border:1px solid black;
+    }
+    </style>
+
+<body>
+	<h1>Edit study hour entries</h1>
+    <div>
+        <form th:action="@{save}" th:object="${edit}" action="#" method="post">
+            <input type="hidden" id="id" th:field="*{id}" />
+            <label for="entrydate">Entrydate</label>
+            <input type="text" id="entrydate" th:field="*{entrydate}" />
+            <label for="course">Course</label>
+            <input type="text" id="course" th:field="*{course}" />
+            <label for="hours">Hours</label>
+            <input type="text" id="hours" th:field="*{hours}" />
+    
+            <div style="clear: both; display: block; height: 10px;"></div>						
+                  <label for="personlist">Person</label>
+                 <select id="personlist" th:field="*{person}" class="form-control">
+                       <option th:each="person: ${persons}" th:value="${person.personId}" th:text="${person.name}"></option>
+                </select>   
+            <div style="clear: both; display: block; height: 10px;"></div>
+    
+            <input type="submit" value="Save" />
+        </form>
+        </div> 
+     <br><br>
+     <a href="/entrylist">Show study hours</a>   	
+</body>
+</html>

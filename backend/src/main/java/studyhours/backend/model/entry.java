@@ -3,6 +3,7 @@ package studyhours.backend.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
+//generate class to database with entity
 @Entity
 public class entry {
     @Id

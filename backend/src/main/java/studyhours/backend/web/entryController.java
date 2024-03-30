@@ -11,6 +11,8 @@ import studyhours.backend.model.person;
 import studyhours.backend.model.entry;
 import studyhours.backend.model.entryRepository;
 import studyhours.backend.model.personRepository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class entryController {
@@ -27,5 +29,38 @@ public class entryController {
                 model.addAttribute("entries", repository.findAll());
                 return "entrylist";
         }
+
+        //add new hour entry
+        @RequestMapping("addentry")
+        public String addEntry(Model model) {
+                model.addAttribute("entry", new entry());
+                model.addAttribute("persons", erepository.findAll());
+                return "addentry";
+        }
+
+         //save hour entry
+         @RequestMapping(value="/save", method = RequestMethod.POST)
+         public String save(entry entry) {
+                 repository.save(entry);
+                 return "redirect:entrylist";
+         }
+          // delete hour entry
+         @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+         public String deleteEntry(@PathVariable("id") Long entryId, Model model) {
+                     repository.deleteById(entryId);
+                 return "redirect:../entrylist";
+         }
+          //edit hour entry
+          @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+          public String editEntry(@PathVariable("id") Long Id, Model model) {
+                  model.addAttribute("edit", repository.findById(Id));
+                  model.addAttribute("persons", erepository.findAll());
+                  return "editentry";
+         
+         }
+
+
+
+        
 
 }
