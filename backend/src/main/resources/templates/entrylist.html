@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <title>Study hour entries list</title>
@@ -20,6 +21,12 @@
 
 <body>
 	<h1>Study hour entries</h1>
+    <div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
+    <div>
     <table> 
         <th>Entrydate</th>
         <th>Course</th>
@@ -30,10 +37,12 @@
             <td th:text="${entry.course}"></td>  	 	
             <td th:text="${entry.hours}"></td> 
             <td th:text="${entry.person.name}"></td> 
-            <td><a th:href="@{/delete/{id}(id=${entry.id})}">Delete</a></td>
+            <!--only admin can see deletion, use hasAuthority instead of hasRole-->
+            <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${entry.id})}">Delete</a></td> 
             <td><a th:href="@{/edit/{id}(id=${entry.id})}">Edit</a></td>
         </tr>
-     </table>  
+     </table> 
+    </div> 
      <br><br>
      <a href="/addentry">Add study hours</a>   	
 </body>

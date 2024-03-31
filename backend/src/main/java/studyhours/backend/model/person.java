@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 
+//generate class to database with entity
 @Entity
 public class person {
     @Id

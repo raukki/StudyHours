@@ -18,7 +18,7 @@
 <body>
 	<h1>Edit study hour entries</h1>
     <div>
-        <form th:action="@{save}" th:object="${edit}" action="#" method="post">
+        <form th:action="@{/save}" th:object="${edit}" action="#" method="post">
             <input type="hidden" id="id" th:field="*{id}" />
             <label for="entrydate">Entrydate</label>
             <input type="text" id="entrydate" th:field="*{entrydate}" />

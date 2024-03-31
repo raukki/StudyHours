@@ -1,6 +1,7 @@
 package studyhours.backend.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,19 +39,20 @@ public class entryController {
                 return "addentry";
         }
 
-         //save hour entry
+        //save hour entry
          @RequestMapping(value="/save", method = RequestMethod.POST)
          public String save(entry entry) {
                  repository.save(entry);
                  return "redirect:entrylist";
          }
-          // delete hour entry
+        // delete hour entry if you are admin user
+         @PreAuthorize("hasAuthority('ADMIN')")
          @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
          public String deleteEntry(@PathVariable("id") Long entryId, Model model) {
                      repository.deleteById(entryId);
                  return "redirect:../entrylist";
          }
-          //edit hour entry
+          //edit hour entry available for all user roles
           @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
           public String editEntry(@PathVariable("id") Long Id, Model model) {
                   model.addAttribute("edit", repository.findById(Id));

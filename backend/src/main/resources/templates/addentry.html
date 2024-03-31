@@ -18,7 +18,7 @@
 <body>
 	<h1>Add study hour entries</h1>
     <div>
-        <form th:action="@{save}" th:object="${entry}" action="#" method="post">
+        <form th:action="@{/save}" th:object="${entry}" action="#" method="post">
             <label for="entrydate">Entrydate</label>
             <input type="text" id="entrydate" th:field="*{entrydate}" />
             <label for="course">Course</label>

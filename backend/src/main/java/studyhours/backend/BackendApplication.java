@@ -14,6 +14,9 @@ import studyhours.backend.model.person;
 import studyhours.backend.model.entryRepository;
 import studyhours.backend.model.personRepository;
 
+import studyhours.backend.model.AppUser;
+import studyhours.backend.model.AppUserRepository;
+
 @SpringBootApplication
 public class BackendApplication {
 	//add logger
@@ -24,7 +27,7 @@ public class BackendApplication {
 	}
 
 	@Bean
-	public CommandLineRunner entryDemo(entryRepository repo, personRepository prepo){
+	public CommandLineRunner entryDemo(entryRepository repo, personRepository prepo, AppUserRepository arepo){
 		return (args) -> {
 			log.info("save entries");
 
@@ -38,10 +41,10 @@ public class BackendApplication {
 			repo.save(new entry("4.1.2023","Tietokannat", 3.00, person2));
 
 			// Create users: admin/admin user/user
-			//AppUser user1 = new AppUser("user", "$2a$10$U/t1pLApu32EZPAqDSVOmOJnK/K3LWpqQppt6uKrkemcoPIkI7M5C", "USER");
-			//AppUser user2 = new AppUser("admin", "$2a$10$ymLMZaaoYsn/rWbKF..dLeDSQP4rBY68aNG3VkPdlaEy11YxH40vu", "ADMIN");
-			//arepo.save(user1);
-			//arepo.save(user2);
+			AppUser user1 = new AppUser("user", "$2a$10$U/t1pLApu32EZPAqDSVOmOJnK/K3LWpqQppt6uKrkemcoPIkI7M5C", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$ymLMZaaoYsn/rWbKF..dLeDSQP4rBY68aNG3VkPdlaEy11YxH40vu", "ADMIN");
+			arepo.save(user1);
+			arepo.save(user2);
 
 			log.info("fetch all books");
 			for (entry entry: repo.findAll()){
